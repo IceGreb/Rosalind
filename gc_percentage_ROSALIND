@@ -1,0 +1,34 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Sat May 20 15:08:17 2023
+
+@author: nick
+"""
+def gc_percentage(file):
+    import re
+    dnas={}
+    seq=""
+    with open(file,"r") as fopen:
+        read_file=fopen.readlines()
+        for e in read_file:
+            for c in e:
+                if re.match('^>',e):
+                    header=e.strip('>\n')
+                    seq=""
+                else:
+                    while c != '\n':
+                        seq=seq+c
+                        break
+                dnas[header]=seq
+    for k in dnas:
+        sum_gc=0
+        for b in dnas[k]:
+            if b == 'G' or b == 'C':
+                sum_gc+=1
+    #print(ID.strip(">\n"))
+        dnas[k]="%.6f"%(sum_gc/len(dnas[k])*100)
+    max_gc=max(dnas, key=dnas.get)
+    print(max_gc,'\n',dnas[max_gc])
+gc_percentage("/home/nick/Λήψεις/rosalind_gc.txt")           
+                

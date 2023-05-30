@@ -1,0 +1,32 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Sun May 21 01:18:51 2023
+
+@author: nick
+"""
+import numpy as np
+
+n=int(input())
+k=1
+m=int(input())
+counter=0
+F=np.zeros([n+1],dtype=int)
+X=np.zeros([n+1],dtype=int)
+F[0:2]=1
+for i in range(2,n+1):
+    if i<m:
+        F[i]=k*F[i-2]+F[i-1]
+    elif i==m:
+        F[i]=k*F[i-2]+F[i-1]-1
+        X[i]=F[i-m]
+    else:
+        F[i]=F[i-1]+F[i-2]-X[i-1]
+        X[i]=F[i-m]
+#print(sum(F[0:m]))
+#print(F[0:a-(m+1)])
+#for a in range(n,m-1,-1):
+#    print(F[a])
+#    F[a]=F[a]-sum(F[0:(a-m)+1])
+    #counter+=1
+print(F)
